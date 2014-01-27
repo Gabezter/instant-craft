@@ -18,9 +18,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.yahoo.gabezter4.instantcraft.Methods;
+
 public class InstantCraft extends JavaPlugin implements Listener {
 		
 	public static Inventory workbench;
+	public final Methods m = new Methods();
 		@Override
 		public void onEnable() {
 			workbench = Bukkit.createInventory(null, InventoryType.WORKBENCH);
@@ -28,8 +31,9 @@ public class InstantCraft extends JavaPlugin implements Listener {
 			if (!config.exists()){
 				this.getLogger().info("Creating the config.yml file...");
 				this.getConfig().options().copyDefaults(true);
-				this.saveConfig();
-				}}
+				this.saveConfig();}
+				}
+		
 
 		@Override
 		public void onDisable() {}
@@ -109,7 +113,6 @@ public class InstantCraft extends JavaPlugin implements Listener {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 				Player player = (Player) sender;
 				PlayerInventory inventory = player.getInventory();
-				ItemStack[] inv = inventory.getContents();
 		if(cmd.getName().equalsIgnoreCase("ic")){
 		    sender.sendMessage(ChatColor.DARK_GREEN + "This is the Main Command. Do /iccraft for the crafting. do /icrecipe for recipes.");
 		    sender.sendMessage(ChatColor.GREEN + "Version 1.0.0");
@@ -140,47 +143,38 @@ public class InstantCraft extends JavaPlugin implements Listener {
 							if(sender.hasPermission("ic.all"))
 								if(sender.hasPermission("ic.admin"))
 									if(inventory.contains(wood)){
-										if(((ItemStack) player).getAmount() >= 4){
+										if(m.getWood(player) >= 4){
 											inventory.removeItem(wb1);
 											inventory.addItem(wb2);
 											sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Workbench");
-										}}else{sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");}return true;} 
+										}}}else{sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");}return true;} 
 				if(args[0].equalsIgnoreCase("chest")){
 					if(sender.hasPermission("ic.chest"))
 						if(sender.hasPermission("ic.all"))
 							if(sender.hasPermission("ic.admin"))
 								if(inventory.contains(wood)){
-								for(int i = 0; 1< inv.length; i++){
-									if(inv[i] !=null){
-										if(inv[i].getAmount() >= 8){
 											inventory.removeItem(chest1);
 											inventory.addItem(chest2);
 											sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Chest");
-											}}}}else{
+											}else{
 										sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
 										}} 
 				if(args[0].equalsIgnoreCase("sign")){
 					if(sender.hasPermission("ic.sign"))
 						if(sender.hasPermission("ic.all"))
-							if(sender.hasPermission("ic.admin"))
+							if(sender.hasPermission("ic.admin"))								
 								if(inventory.contains(wood)){
-										for(int iii = 0; 1< inv.length; iii++){
-											if(inv[iii] !=null){
-												if(inv[iii].getAmount() >=2){
-													if(inventory.contains(stick)){
-														for(int i = 0; 1< inv.length; i++){
-															if(inv[i] !=null){
-																if(inv[i].getAmount() >= 1){
-																	inventory.removeItem(sign2);
-																	inventory.removeItem(sign1);
-																	inventory.addItem(sign3);
-																	sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Sign");			
-															}}}}else{
-																sender.sendMessage(ChatColor.DARK_RED + "You need Stick!!");
-															}
-												}}}}else{
-													sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
-												}return true;
+									if(inventory.contains(stick)){
+										inventory.removeItem(sign2);
+										inventory.removeItem(sign1);
+										inventory.addItem(sign3);
+										sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Sign");			
+									}else{
+										sender.sendMessage(ChatColor.DARK_RED + "You need Stick!!");
+									}
+									}else{
+									sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
+									}return true;
 				}
 				if(args[0].equalsIgnoreCase("door")){
 					if(args[1].equalsIgnoreCase("wood")){
@@ -188,13 +182,10 @@ public class InstantCraft extends JavaPlugin implements Listener {
 							if(sender.hasPermission("ic.all"))
 								if(sender.hasPermission("ic.admin"))
 									if(inventory.contains(wood)){
-										for(int i = 0; 1< inv.length; i++){
-											if(inv[i] !=null){
-												if(inv[i].getAmount() >= 6){
 													inventory.removeItem(wdoor1);
 													inventory.addItem(wdoor2);
 													sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Door");			
-												}}}}else{
+												}else{
 													sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
 												}
 					return true;}
@@ -203,13 +194,10 @@ public class InstantCraft extends JavaPlugin implements Listener {
 							if(sender.hasPermission("ic.all"))
 								if(sender.hasPermission("ic.admin"))
 									if(inventory.contains(iron)){
-										for(int i = 0; 1< inv.length; i++){
-											if(inv[i] !=null){
-												if(inv[i].getAmount() >= 6){
 														inventory.removeItem(idoor1);
 														inventory.addItem(idoor2);
 														sender.sendMessage(ChatColor.DARK_AQUA + "You now have an" + ChatColor.RESET + ChatColor.BLUE + " Iron Door");			
-												}}}}else{
+												}else{
 														sender.sendMessage(ChatColor.DARK_RED + "You need more Iron!!");
 													}
 					}return true;
@@ -220,101 +208,71 @@ public class InstantCraft extends JavaPlugin implements Listener {
 								if(sender.hasPermission("ic.admin"))
 									if(args[1].equalsIgnoreCase("wood")){
 										if(inventory.contains(tool)){
-											for(int i = 0; 1< inv.length; i++){
-												if(inv[i] !=null){
-													if(inv[i].getAmount() >= 2){
 														if(inventory.contains(wood)){
-															for(int ii = 0; 1< inv.length; ii++){
-																if(inv[ii] !=null){
-																	if(inv[ii].getAmount() >= 2){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(axe1);
 																		inventory.addItem(axe_1);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Wood Axe");			
-																	}}}}else{
+																	}else{
 																		sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
 																	}
-																	}}}}else{
+																	}else{
 																	sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");	
 																}return true;
 									}
 									if(args[1].equalsIgnoreCase("stone")){
 										if(inventory.contains(tool)){
-											for(int i = 0; 1< inv.length; i++){
-												if(inv[i] !=null){
-													if(inv[i].getAmount() >= 2){
 														if(inventory.contains(stone)){
-															for(int ii = 0; 1< inv.length; ii++){
-																if(inv[ii] !=null){
-																	if(inv[ii].getAmount() >= 3){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(axe2);
 																		inventory.addItem(axe_2);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Stone Axe");			
-																	}}}}else{
+																	}else{
 																		sender.sendMessage(ChatColor.DARK_RED + "You need more Stone!!");
 																	}
-													}}}}else{
+													}else{
 														sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 										}return true;
 									}
 									if(args[1].equalsIgnoreCase("iron")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >= 3){
 														if(inventory.contains(iron)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >= 3){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(axe3);
 																		inventory.addItem(axe_3);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Iron Axe");			
-																	}}}}else{
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Iron!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("gold")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >= 2){
-														if(inventory.contains(gold)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >= 3){
-																		inventory.removeItem(tool);
-																		inventory.removeItem(axe4);
-																		inventory.addItem(axe_4);
-																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Gold Axe");			
-																	}}}}else{
+											if(inventory.contains(gold)){
+												inventory.removeItem(tool);
+												inventory.removeItem(axe4);
+												inventory.addItem(axe_4);
+												sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Gold Axe");			
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Gold!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("diamond")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >= 2){
 														if(inventory.contains(diamond)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >= 3){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(axe5);
 																		inventory.addItem(axe_5);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Diamond Axe");			
-																	}}}}else{
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Diamonds!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}return true;
@@ -326,14 +284,11 @@ public class InstantCraft extends JavaPlugin implements Listener {
 									if(args[1].equalsIgnoreCase("wood")){
 										if(inventory.contains(tool)){
 											if(inventory.contains(wood)){
-												for(int i = 0; 1< inv.length; i++){
-													if(inv[i] !=null){
-														if(inv[i].getAmount() >= 2){
 															inventory.removeItem(tool);
 															inventory.removeItem(pick1);
 															inventory.addItem(pick_1);
 															sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Wood Pickaxe");			
-														}}}}else{
+														}else{
 															sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
 														}
 													}else{
@@ -342,81 +297,57 @@ public class InstantCraft extends JavaPlugin implements Listener {
 									}
 									if(args[1].equalsIgnoreCase("stone")){
 										if(inventory.contains(tool)){
-											for(int i = 0; 1< inv.length; i++){
-												if(inv[i] !=null){
-													if(inv[i].getAmount() >= 2){
-														if(inventory.contains(stone)){
-															for(int ii = 0; 1< inv.length; ii++){
-																if(inv[ii] !=null){
-																	if(inv[ii].getAmount() >= 2){
-																		inventory.removeItem(tool);
-																		inventory.removeItem(pick2);
-																		inventory.addItem(pick_2);
-																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Stone Pickaxe");			
-																	}}}}else{
+											if(inventory.contains(stone)){	
+												inventory.removeItem(tool);
+												inventory.removeItem(pick2);
+												inventory.addItem(pick_2);
+												sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Stone Pickaxe");			
+																	}else{
 																		sender.sendMessage(ChatColor.DARK_RED + "You need more Stone!!");
 																	}
-													}}}}else{
+													}else{
 														sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 										}return true;
 									}
 									if(args[1].equalsIgnoreCase("iron")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >=2){
 														if(inventory.contains(iron)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >=3){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(pick3);
 																		inventory.addItem(pick_3);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Iron Pickaxe");			
-																	}}}}else{
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Iron!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("gold")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >=2){
 														if(inventory.contains(gold)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >=3){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(pick4);
 																		inventory.addItem(pick_4);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Gold Pickaxe");			
-																	}}}}else{
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Gold!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("diamond")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >=2){
 														if(inventory.contains(diamond)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >=3){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(pick5);
 																		inventory.addItem(pick_5);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Diamond Pickaxe");			
-																	}}}}else{
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Diamonds!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}return true;
@@ -428,14 +359,11 @@ public class InstantCraft extends JavaPlugin implements Listener {
 									if(args[1].equalsIgnoreCase("wood")){
 										if(inventory.contains(tool)){
 											if(inventory.contains(wood)){
-												for(int i = 0; 1< inv.length; i++){
-													if(inv[i] !=null){
-														if(inv[i].getAmount() >= 2){
 															inventory.removeItem(tool);
 															inventory.removeItem(hoe1);
 															inventory.addItem(hoe_1);
 															sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Wood Hoe");			
-														}}}}else{
+														}else{
 															sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
 														}
 													}else{
@@ -444,81 +372,57 @@ public class InstantCraft extends JavaPlugin implements Listener {
 									}
 									if(args[1].equalsIgnoreCase("stone")){
 										if(inventory.contains(tool)){
-											for(int i = 0; 1< inv.length; i++){
-												if(inv[i] !=null){
-													if(inv[i].getAmount() >= 2){
 														if(inventory.contains(stone)){
-															for(int ii = 0; 1< inv.length; ii++){
-																if(inv[ii] !=null){
-																	if(inv[ii].getAmount() >= 2){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(hoe2);
 																		inventory.addItem(hoe_2);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Stone Hoe");			
-																	}}}}else{
+																	}else{
 																		sender.sendMessage(ChatColor.DARK_RED + "You need more Stone!!");
 																	}
-													}}}}else{
+													}else{
 														sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 										}return true;
 									}
 									if(args[1].equalsIgnoreCase("iron")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >=2){
 														if(inventory.contains(iron)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >=2){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(hoe3);
 																		inventory.addItem(hoe_3);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Iron Hoe");			
-																	}}}}else{
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Iron!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("gold")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >=2){
 														if(inventory.contains(gold)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >=2){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(hoe4);
 																		inventory.addItem(hoe_4);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Gold Hoe");			
-																	}}}}else{
+																}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Gold!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("diamond")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >=2){
 														if(inventory.contains(diamond)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >=2){
-																		inventory.removeItem(tool);
-																		inventory.removeItem(hoe5);
-																		inventory.addItem(hoe_5);
-																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Diamond Hoe");			
-																	}}}}else{
+															inventory.removeItem(tool);
+															inventory.removeItem(hoe5);
+															inventory.addItem(hoe_5);
+															sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Diamond Hoe");			
+															}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Diamonds!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}}
@@ -528,104 +432,74 @@ public class InstantCraft extends JavaPlugin implements Listener {
 								if(sender.hasPermission("ic.admin"))
 									if(args[1].equalsIgnoreCase("wood")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >=2){
 														if(inventory.contains(wood)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >=1){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(shovel1);
 																		inventory.addItem(shovel_1);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Wood Shovel");			
-																	}}}}else{
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("stone")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >=2){
 														if(inventory.contains(stone)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >= 4){
 																		inventory.removeItem(tool);
 																		inventory.removeItem(shovel2);
 																		inventory.addItem(shovel_2);
 																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Stone Shovel");			
-																	}}}}else{
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Stone!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("iron")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >= 4){
-														if(inventory.contains(iron)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >= 4){
-																		inventory.removeItem(tool);
-																		inventory.removeItem(shovel3);
-																		inventory.addItem(shovel_3);
-																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Iron Shovel");			
-																	}}}}else{
+												if(inventory.contains(iron)){
+													inventory.removeItem(tool);
+													inventory.removeItem(shovel3);
+													inventory.addItem(shovel_3);
+													sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Iron Shovel");			
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Iron!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
 									if(args[1].equalsIgnoreCase("gold")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >= 4){
-														if(inventory.contains(gold)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >= 4){
-																		inventory.removeItem(tool);
-																		inventory.removeItem(shovel4);
-																		inventory.addItem(shovel_4);
-																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Gold Shovel");			
-																	}}}}else{
+											if(inventory.contains(gold)){
+												inventory.removeItem(tool);
+												inventory.removeItem(shovel4);
+												inventory.addItem(shovel_4);
+												sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Gold Shovel");			
+											}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Gold!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									}
-									if(args[1].equalsIgnoreCase("daimond")){
+									if(args[1].equalsIgnoreCase("diamond")){
 										if(inventory.contains(tool)){
-											for(int iii = 0; 1< inv.length; iii++){
-												if(inv[iii] !=null){
-													if(inv[iii].getAmount() >= 4){
-														if(inventory.contains(diamond)){
-															for(int iiii = 0; 1< inv.length; iiii++){
-																if(inv[iiii] !=null){
-																	if(inv[iiii].getAmount() >= 4){
-																		inventory.removeItem(tool);
-																		inventory.removeItem(shovel5);
-																		inventory.addItem(shovel_5);
-																		sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Diamond Shovel");			
-																	}}}}else{
+											if(inventory.contains(diamond)){
+												inventory.removeItem(tool);
+												inventory.removeItem(shovel5);
+												inventory.addItem(shovel_5);
+												sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Diamond Shovel");			
+																	}else{
 												sender.sendMessage(ChatColor.DARK_RED + "You need more Diamonds!!");
 											}
-													}}}}else{
+													}else{
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
-									}
+									
 								}
 
 					sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Crafts Currently Allowed!!" + ChatColor.DARK_AQUA + "_____");
@@ -655,7 +529,8 @@ public class InstantCraft extends JavaPlugin implements Listener {
 				return true;	
 			}
 			return true;
-		}return false;}
+		}return false;
+				}
 	
 
 
