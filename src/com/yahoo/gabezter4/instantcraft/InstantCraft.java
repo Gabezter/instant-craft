@@ -135,7 +135,6 @@ public class InstantCraft extends JavaPlugin implements Listener {
 					if(args[1].equalsIgnoreCase("2")){
 						sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Crafts Currently Allowed!! Page:2" + ChatColor.DARK_AQUA + "_____");
 						sender.sendMessage(ChatColor.DARK_BLUE + "|- All Tools");
-						sender.sendMessage(ChatColor.DARK_BLUE + "|- All Swords");
 						sender.sendMessage(ChatColor.DARK_GREEN + "More will come soon.");
 					}}
 				if(args[0].equalsIgnoreCase("workbench")){
@@ -587,14 +586,8 @@ public class InstantCraft extends JavaPlugin implements Listener {
 					sender.sendMessage(ChatColor.DARK_RED + "Crafting via Plugin is now NOT allowed!!!");
 				}
 			}
-			
-			
-			
 			return true;
 		}
-		
-		
-		
 		return false;
 				}
 	
