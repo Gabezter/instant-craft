@@ -146,11 +146,11 @@ public class InstantCraft extends JavaPlugin implements Listener {
 											inventory.removeItem(wb1);
 											inventory.addItem(wb2);
 											sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Workbench");
-										}}}else{sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");}return true;} 
+										}}else{sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");}return true; }
 				if(args[0].equalsIgnoreCase("chest")){
-					if(sender.hasPermission("ic.chest"))
-						if(sender.hasPermission("ic.all"))
-							if(sender.hasPermission("ic.admin"))
+					if(sender.hasPermission("ic.chest")){
+						if(sender.hasPermission("ic.all")){
+							if(sender.hasPermission("ic.admin")){
 								if(inventory.contains(wood)){
 									if(m.getWood(player) >= 8){
 											inventory.removeItem(chest1);
@@ -158,7 +158,7 @@ public class InstantCraft extends JavaPlugin implements Listener {
 											sender.sendMessage(ChatColor.DARK_AQUA + "You now have a" + ChatColor.RESET + ChatColor.BLUE + "Chest");
 									}}else{
 										sender.sendMessage(ChatColor.DARK_RED + "You need more Wood!!");
-										}} 
+										return true; }}}}}
 				if(args[0].equalsIgnoreCase("sign")){
 					if(sender.hasPermission("ic.sign"))
 						if(sender.hasPermission("ic.all"))
@@ -544,7 +544,9 @@ public class InstantCraft extends JavaPlugin implements Listener {
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									
-								}
+								}}
+					
+				
 
 					sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Crafts Currently Allowed!!" + ChatColor.DARK_AQUA + "_____");
 					sender.sendMessage(ChatColor.DARK_BLUE + "|Commmand Usage: " + ChatColor.AQUA + "/iccraft [item/block name] (type)");
@@ -554,36 +556,40 @@ public class InstantCraft extends JavaPlugin implements Listener {
 					sender.sendMessage(ChatColor.DARK_BLUE + "|- Chest");
 					sender.sendMessage(ChatColor.DARK_BLUE + "|- Wood Door");
 					sender.sendMessage(ChatColor.DARK_BLUE + "|- Iron Door");
-					sender.sendMessage(ChatColor.DARK_GREEN + "For more possible items do /iccraft list 2");
-						}else{
+			}else{
 						sender.sendMessage(ChatColor.DARK_RED + "Crafting this way is not allowed!!");
 					}
 				return true;
-		}if(cmd.getName().equalsIgnoreCase("icrecipe")){
+		}
+
+		if(cmd.getName().equalsIgnoreCase("icrecipe")){
 			sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Recipes Currently Added!!" + ChatColor.DARK_AQUA + "_____");
 			sender.sendMessage(ChatColor.DARK_BLUE + "Workbench");
 			sender.sendMessage(ChatColor.DARK_GREEN + "More will be added soon.");
 			if(args[0].equalsIgnoreCase("workbench")){
 				workbench.setItem(1, wb11);
 				workbench.setItem(2, wb11);
-				workbench.setItem(3, wb11);
+				workbench.setItem(4, wb11);
 				workbench.setItem(5, wb11);
-				workbench.setItem(10, wb2);
+				workbench.setItem(0, wb2);
 				player.openInventory(workbench);
 				return true;	
 			}
-			return true;
-			
-		}
+			sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Recipes Currently Added!!" + ChatColor.DARK_AQUA + "_____");
+			sender.sendMessage(ChatColor.DARK_BLUE + "Workbench");
+			sender.sendMessage(ChatColor.DARK_GREEN + "More will be added soon.");
+			return true;}
 		if(cmd.getName().equalsIgnoreCase("config")){
 			if(args[0].equalsIgnoreCase("crafting")){
 				if(args[1].equalsIgnoreCase("true")){
 					this.getConfig().set("Allow Instant Crafting", true);
 					sender.sendMessage(ChatColor.DARK_RED + "Crafting via Plugin is now allowed!!!");
+					return true;
 				}
 				if(args[1].equalsIgnoreCase("false")){
 					this.getConfig().set("Allow Instant Crafting", false);
 					sender.sendMessage(ChatColor.DARK_RED + "Crafting via Plugin is now NOT allowed!!!");
+					return true;
 				}
 			}
 			return true;
