@@ -9,7 +9,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class Methods {
 	
-	int amount;
+	private int amount;
 	int getWood(Player player){
 		amount = 0;
 		PlayerInventory pi = player.getInventory();

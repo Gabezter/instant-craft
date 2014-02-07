@@ -33,8 +33,6 @@ public class InstantCraft extends JavaPlugin implements Listener {
 				this.getConfig().options().copyDefaults(true);
 				this.saveConfig();}
 				}
-		
-
 		@Override
 		public void onDisable() {}
 		
@@ -136,7 +134,7 @@ public class InstantCraft extends JavaPlugin implements Listener {
 						sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Crafts Currently Allowed!! Page:2" + ChatColor.DARK_AQUA + "_____");
 						sender.sendMessage(ChatColor.DARK_BLUE + "|- All Tools");
 						sender.sendMessage(ChatColor.DARK_GREEN + "More will come soon.");
-					}}
+					return true;}return true;}
 				if(args[0].equalsIgnoreCase("workbench")){
 						if(sender.hasPermission("ic.workbench"))
 							if(sender.hasPermission("ic.all"))
@@ -544,7 +542,7 @@ public class InstantCraft extends JavaPlugin implements Listener {
 											sender.sendMessage(ChatColor.DARK_RED + "You need more Sticks!!");
 											}return true;
 									
-								}}
+								}return true;}
 					
 				
 
@@ -563,9 +561,6 @@ public class InstantCraft extends JavaPlugin implements Listener {
 		}
 
 		if(cmd.getName().equalsIgnoreCase("icrecipe")){
-			sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Recipes Currently Added!!" + ChatColor.DARK_AQUA + "_____");
-			sender.sendMessage(ChatColor.DARK_BLUE + "Workbench");
-			sender.sendMessage(ChatColor.DARK_GREEN + "More will be added soon.");
 			if(args[0].equalsIgnoreCase("workbench")){
 				workbench.setItem(1, wb11);
 				workbench.setItem(2, wb11);
@@ -579,7 +574,7 @@ public class InstantCraft extends JavaPlugin implements Listener {
 			sender.sendMessage(ChatColor.DARK_BLUE + "Workbench");
 			sender.sendMessage(ChatColor.DARK_GREEN + "More will be added soon.");
 			return true;}
-		if(cmd.getName().equalsIgnoreCase("config")){
+		if(cmd.getName().equalsIgnoreCase("icconfig")){
 			if(args[0].equalsIgnoreCase("crafting")){
 				if(args[1].equalsIgnoreCase("true")){
 					this.getConfig().set("Allow Instant Crafting", true);
@@ -600,16 +595,16 @@ public class InstantCraft extends JavaPlugin implements Listener {
 
 
 	@EventHandler
-	public void OnInventoryClick(InventoryClickEvent event){
-		if(event.getInventory() == workbench){
-			if(event.getCurrentItem().getType() == wood){
-				event.setCancelled(true);
+	public void OnInventoryClick(InventoryClickEvent e){
+		if(e.getInventory() == workbench){
+			if(e.getCurrentItem().getType() == wood){
+				e.setCancelled(true);
 			}
-			if(event.getCurrentItem().getType() == Material.WORKBENCH){
-				event.setCancelled(true);
+			if(e.getCurrentItem().getType() == Material.WORKBENCH){
+				e.setCancelled(true);
 			}}}
 	@EventHandler
-	public void onInventoryLeave(InventoryCloseEvent event){
-		if(event.getInventory() == workbench){
+	public void onInventoryLeave(InventoryCloseEvent e){
+		if(e.getInventory() == workbench){
 			workbench.clear();
 		}}}
