@@ -26,7 +26,6 @@ public class Methods {
 		}
 		return amount;
 	}
-
 	int getStone(Player player){
 		amount = 0;
 		PlayerInventory pi = player.getInventory();
@@ -59,7 +58,4 @@ public class Methods {
 		}
 		return amount;
 	}
-		
-	
-
 }

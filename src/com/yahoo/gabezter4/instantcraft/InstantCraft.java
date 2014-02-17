@@ -8,21 +8,15 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.yahoo.gabezter4.instantcraft.Methods;
-
-public class InstantCraft extends JavaPlugin implements Listener {
+public class InstantCraft extends JavaPlugin {
 		
-	public static Inventory workbench;
+	public Inventory workbench;
 	public final Methods m = new Methods();
 		@Override
 		public void onEnable() {
@@ -36,77 +30,77 @@ public class InstantCraft extends JavaPlugin implements Listener {
 		@Override
 		public void onDisable() {}
 		
-		Material wood = Material.WOOD;
-		Material stick = Material.STICK;
-		Material iron = Material.IRON_INGOT;
-		Material stone = Material.COBBLESTONE;
-		Material gold = Material.GOLD_INGOT;
-		Material diamond = Material.DIAMOND;
+		public Material wood = Material.WOOD;
+		public Material stick = Material.STICK;
+		public Material iron = Material.IRON_INGOT;
+		public Material stone = Material.COBBLESTONE;
+		public Material gold = Material.GOLD_INGOT;
+		public Material diamond = Material.DIAMOND;
 		
-		ItemStack wb1 = new ItemStack(wood, 4);
-		ItemStack wb11 = new ItemStack(wood, 1);
-		ItemStack wb2 = new ItemStack(Material.WORKBENCH, 1);
-		ItemStack chest1 = new ItemStack(wood, 8);
-		ItemStack chest2 = new ItemStack(Material.CHEST, 1);
-		ItemStack sign1 = new ItemStack(wood, 6);
-		ItemStack sign2 = new ItemStack(stick, 1);
-		ItemStack sign3 = new ItemStack(Material.SIGN, 3);
-		ItemStack wdoor1 = new ItemStack(wood, 6);
-		ItemStack wdoor2 = new ItemStack(Material.WOODEN_DOOR, 1);
-		ItemStack idoor1 = new ItemStack(iron, 6);
-		ItemStack idoor2 = new ItemStack(Material.IRON_DOOR, 1);
-		ItemStack tool = new ItemStack(stick, 2);
-		ItemStack axe1 = new ItemStack(wood, 1);
-		ItemStack axe2 = new ItemStack(Material.COBBLESTONE, 3);
-		ItemStack axe3 = new ItemStack(iron, 3);
-		ItemStack axe4 = new ItemStack(Material.GOLD_INGOT,3);
-		ItemStack axe5 = new ItemStack(Material.DIAMOND, 3);
-		ItemStack axe_1 = new ItemStack(Material.WOOD_AXE, 1);
-		ItemStack axe_2 = new ItemStack(Material.STONE_AXE, 1);
-		ItemStack axe_3 = new ItemStack(Material.IRON_AXE, 1);
-		ItemStack axe_4 = new ItemStack(Material.GOLD_AXE, 1);
-		ItemStack axe_5 = new ItemStack(Material.DIAMOND_AXE, 1);
-		ItemStack pick1 = new ItemStack(wood, 3);
-		ItemStack pick2 = new ItemStack(Material.COBBLESTONE, 3);
-		ItemStack pick3 = new ItemStack(iron, 3);
-		ItemStack pick4 = new ItemStack(Material.GOLD_INGOT,3);
-		ItemStack pick5 = new ItemStack(Material.DIAMOND, 3);
-		ItemStack pick_1 = new ItemStack(Material.WOOD_PICKAXE, 1);
-		ItemStack pick_2 = new ItemStack(Material.STONE_PICKAXE, 1);
-		ItemStack pick_3 = new ItemStack(Material.IRON_PICKAXE, 1);
-		ItemStack pick_4 = new ItemStack(Material.GOLD_PICKAXE, 1);
-		ItemStack pick_5 = new ItemStack(Material.DIAMOND_PICKAXE, 1);
-		ItemStack sword = new ItemStack(stick, 1);
-		ItemStack sword1 = new ItemStack(wood, 2);
-		ItemStack sword2 = new ItemStack(Material.COBBLESTONE, 2);
-		ItemStack sword3 = new ItemStack(iron, 2);
-		ItemStack sword4 = new ItemStack(Material.GOLD_INGOT,2);
-		ItemStack sword5 = new ItemStack(Material.DIAMOND, 2);
-		ItemStack sword_1 = new ItemStack(Material.WOOD_SWORD, 1);
-		ItemStack sword_2 = new ItemStack(Material.STONE_SWORD, 1);
-		ItemStack sword_3 = new ItemStack(Material.IRON_SWORD, 1);
-		ItemStack sword_4 = new ItemStack(Material.GOLD_SWORD, 1);
-		ItemStack sword_5 = new ItemStack(Material.DIAMOND_SWORD, 1);
-		ItemStack hoe1 = new ItemStack(wood, 2);
-		ItemStack hoe2 = new ItemStack(Material.COBBLESTONE, 2);
-		ItemStack hoe3 = new ItemStack(iron, 2);
-		ItemStack hoe4 = new ItemStack(Material.GOLD_INGOT, 2);
-		ItemStack hoe5 = new ItemStack(Material.DIAMOND, 2);
-		ItemStack hoe_1 = new ItemStack(Material.WOOD_HOE, 1);
-		ItemStack hoe_2 = new ItemStack(Material.STONE_HOE, 1);
-		ItemStack hoe_3 = new ItemStack(Material.IRON_HOE, 1);
-		ItemStack hoe_4 = new ItemStack(Material.GOLD_HOE, 1);
-		ItemStack hoe_5 = new ItemStack(Material.DIAMOND_HOE, 1);
-		ItemStack shovel1 = new ItemStack(wood, 1);
-		ItemStack shovel2 = new ItemStack(Material.COBBLESTONE, 1);
-		ItemStack shovel3 = new ItemStack(iron, 1);
-		ItemStack shovel4 = new ItemStack(Material.GOLD_INGOT,1);
-		ItemStack shovel5 = new ItemStack(Material.DIAMOND, 1);
-		ItemStack shovel_1 = new ItemStack(Material.WOOD_SPADE, 1);
-		ItemStack shovel_2 = new ItemStack(Material.STONE_SPADE, 1);
-		ItemStack shovel_3 = new ItemStack(Material.IRON_SPADE, 1);
-		ItemStack shovel_4 = new ItemStack(Material.GOLD_SPADE, 1);
-		ItemStack shovel_5 = new ItemStack(Material.DIAMOND_SPADE, 1);
+		public ItemStack wb1 = new ItemStack(wood, 4);
+		public ItemStack wb11 = new ItemStack(wood, 1);
+		public ItemStack wb2 = new ItemStack(Material.WORKBENCH, 1);
+		public ItemStack chest1 = new ItemStack(wood, 8);
+		public ItemStack chest2 = new ItemStack(Material.CHEST, 1);
+		public ItemStack sign1 = new ItemStack(wood, 6);
+		public ItemStack sign2 = new ItemStack(stick, 1);
+		public ItemStack sign3 = new ItemStack(Material.SIGN, 3);
+		public ItemStack wdoor1 = new ItemStack(wood, 6);
+		public ItemStack wdoor2 = new ItemStack(Material.WOODEN_DOOR, 1);
+		public ItemStack idoor1 = new ItemStack(iron, 6);
+		public ItemStack idoor2 = new ItemStack(Material.IRON_DOOR, 1);
+		public ItemStack tool = new ItemStack(stick, 2);
+		public ItemStack axe1 = new ItemStack(wood, 1);
+		public ItemStack axe2 = new ItemStack(Material.COBBLESTONE, 3);
+		public ItemStack axe3 = new ItemStack(iron, 3);
+		public ItemStack axe4 = new ItemStack(Material.GOLD_INGOT,3);
+		public ItemStack axe5 = new ItemStack(Material.DIAMOND, 3);
+		public ItemStack axe_1 = new ItemStack(Material.WOOD_AXE, 1);
+		public ItemStack axe_2 = new ItemStack(Material.STONE_AXE, 1);
+		public ItemStack axe_3 = new ItemStack(Material.IRON_AXE, 1);
+		public ItemStack axe_4 = new ItemStack(Material.GOLD_AXE, 1);
+		public ItemStack axe_5 = new ItemStack(Material.DIAMOND_AXE, 1);
+		public ItemStack pick1 = new ItemStack(wood, 3);
+		public ItemStack pick2 = new ItemStack(Material.COBBLESTONE, 3);
+		public ItemStack pick3 = new ItemStack(iron, 3);
+		public ItemStack pick4 = new ItemStack(Material.GOLD_INGOT,3);
+		public ItemStack pick5 = new ItemStack(Material.DIAMOND, 3);
+		public ItemStack pick_1 = new ItemStack(Material.WOOD_PICKAXE, 1);
+		public ItemStack pick_2 = new ItemStack(Material.STONE_PICKAXE, 1);
+		public ItemStack pick_3 = new ItemStack(Material.IRON_PICKAXE, 1);
+		public ItemStack pick_4 = new ItemStack(Material.GOLD_PICKAXE, 1);
+		public ItemStack pick_5 = new ItemStack(Material.DIAMOND_PICKAXE, 1);
+		public 	ItemStack sword = new ItemStack(stick, 1);
+		public 	ItemStack sword1 = new ItemStack(wood, 2);
+		public ItemStack sword2 = new ItemStack(Material.COBBLESTONE, 2);
+		public ItemStack sword3 = new ItemStack(iron, 2);
+		public ItemStack sword4 = new ItemStack(Material.GOLD_INGOT,2);
+		public ItemStack sword5 = new ItemStack(Material.DIAMOND, 2);
+		public ItemStack sword_1 = new ItemStack(Material.WOOD_SWORD, 1);
+		public ItemStack sword_2 = new ItemStack(Material.STONE_SWORD, 1);
+		public ItemStack sword_3 = new ItemStack(Material.IRON_SWORD, 1);
+		public ItemStack sword_4 = new ItemStack(Material.GOLD_SWORD, 1);
+		public ItemStack sword_5 = new ItemStack(Material.DIAMOND_SWORD, 1);
+		public ItemStack hoe1 = new ItemStack(wood, 2);
+		public ItemStack hoe2 = new ItemStack(Material.COBBLESTONE, 2);
+		public ItemStack hoe3 = new ItemStack(iron, 2);
+		public ItemStack hoe4 = new ItemStack(Material.GOLD_INGOT, 2);
+		public ItemStack hoe5 = new ItemStack(Material.DIAMOND, 2);
+		public ItemStack hoe_1 = new ItemStack(Material.WOOD_HOE, 1);
+		public ItemStack hoe_2 = new ItemStack(Material.STONE_HOE, 1);
+		public ItemStack hoe_3 = new ItemStack(Material.IRON_HOE, 1);
+		public ItemStack hoe_4 = new ItemStack(Material.GOLD_HOE, 1);
+		public ItemStack hoe_5 = new ItemStack(Material.DIAMOND_HOE, 1);
+		public ItemStack shovel1 = new ItemStack(wood, 1);
+		public ItemStack shovel2 = new ItemStack(Material.COBBLESTONE, 1);
+		public ItemStack shovel3 = new ItemStack(iron, 1);
+		public ItemStack shovel4 = new ItemStack(Material.GOLD_INGOT,1);
+		public ItemStack shovel5 = new ItemStack(Material.DIAMOND, 1);
+		public ItemStack shovel_1 = new ItemStack(Material.WOOD_SPADE, 1);
+		public ItemStack shovel_2 = new ItemStack(Material.STONE_SPADE, 1);
+		public ItemStack shovel_3 = new ItemStack(Material.IRON_SPADE, 1);
+		public ItemStack shovel_4 = new ItemStack(Material.GOLD_SPADE, 1);
+		public ItemStack shovel_5 = new ItemStack(Material.DIAMOND_SPADE, 1);
 		
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 				Player player = (Player) sender;
@@ -559,52 +553,6 @@ public class InstantCraft extends JavaPlugin implements Listener {
 					}
 				return true;
 		}
-
-		if(cmd.getName().equalsIgnoreCase("icrecipe")){
-			if(args[0].equalsIgnoreCase("workbench")){
-				workbench.setItem(1, wb11);
-				workbench.setItem(2, wb11);
-				workbench.setItem(4, wb11);
-				workbench.setItem(5, wb11);
-				workbench.setItem(0, wb2);
-				player.openInventory(workbench);
-				return true;	
-			}
-			sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Recipes Currently Added!!" + ChatColor.DARK_AQUA + "_____");
-			sender.sendMessage(ChatColor.DARK_BLUE + "Workbench");
-			sender.sendMessage(ChatColor.DARK_GREEN + "More will be added soon.");
-			return true;}
-		if(cmd.getName().equalsIgnoreCase("icconfig")){
-			if(args[0].equalsIgnoreCase("crafting")){
-				if(args[1].equalsIgnoreCase("true")){
-					this.getConfig().set("Allow Instant Crafting", true);
-					sender.sendMessage(ChatColor.DARK_RED + "Crafting via Plugin is now allowed!!!");
-					return true;
-				}
-				if(args[1].equalsIgnoreCase("false")){
-					this.getConfig().set("Allow Instant Crafting", false);
-					sender.sendMessage(ChatColor.DARK_RED + "Crafting via Plugin is now NOT allowed!!!");
-					return true;
-				}
-			}
-			return true;
-		}
 		return false;
 				}
-	
-
-
-	@EventHandler
-	public void OnInventoryClick(InventoryClickEvent e){
-		if(e.getInventory() == workbench){
-			if(e.getCurrentItem().getType() == wood){
-				e.setCancelled(true);
-			}
-			if(e.getCurrentItem().getType() == Material.WORKBENCH){
-				e.setCancelled(true);
-			}}}
-	@EventHandler
-	public void onInventoryLeave(InventoryCloseEvent e){
-		if(e.getInventory() == workbench){
-			workbench.clear();
-		}}}
+}
