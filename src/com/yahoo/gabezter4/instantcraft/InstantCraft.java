@@ -20,6 +20,8 @@ public class InstantCraft extends JavaPlugin {
 	public final Methods m = new Methods();
 		@Override
 		public void onEnable() {
+			getCommand("icrecipe").setExecutor(new Recipe(this));
+			getCommand("icconfig").setExecutor(new Config(this));
 			workbench = Bukkit.createInventory(null, InventoryType.WORKBENCH);
 			File config = new File(getDataFolder() + File.separator + "config.yml");
 			if (!config.exists()){
