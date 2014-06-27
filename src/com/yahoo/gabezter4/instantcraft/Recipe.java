@@ -13,18 +13,20 @@ public class Recipe implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		if(cmd.getName().equalsIgnoreCase("icrecipe")){
-			if(args[0].equalsIgnoreCase("workbench")){
+			if (args.length == 0) {
+			sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Recipes Currently Added!!" + ChatColor.DARK_AQUA + "_____");
+			sender.sendMessage(ChatColor.DARK_BLUE + "Workbench");
+			sender.sendMessage(ChatColor.DARK_GREEN + "More will be added soon.");
+			return true;
+			}if(args[0].equalsIgnoreCase("workbench")){
 				plugin.workbench.setItem(1, plugin.wb11);
 				plugin.workbench.setItem(2, plugin.wb11);
 				plugin.workbench.setItem(4, plugin.wb11);
 				plugin.workbench.setItem(5, plugin.wb11);
 				plugin.workbench.setItem(0, plugin.wb2);
-				player.openInventory(plugin.workbench);
+				((Player) sender).openInventory(plugin.workbench);
 				return true;	
 			}
-			sender.sendMessage(ChatColor.DARK_AQUA + "_____" + ChatColor.DARK_GREEN + "Recipes Currently Added!!" + ChatColor.DARK_AQUA + "_____");
-			sender.sendMessage(ChatColor.DARK_BLUE + "Workbench");
-			sender.sendMessage(ChatColor.DARK_GREEN + "More will be added soon.");
 			return true;}
 	return false;}
 }
