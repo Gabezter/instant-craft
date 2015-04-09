@@ -1,0 +1,97 @@
+name: InstantCraft
+main: com.yahoo.gabezter4.instantcraft.InstantCraft
+version: 1.0.0
+commands:
+  ic:
+    description: This is the main command.
+    permission: ic
+    permission-message: You are not allowed this command.
+    usage: /ic
+  iccraft:
+    description: This is the command that allows you to craft to item.
+    permission: ic.craft
+    permission-message: You are not allowed this command.
+    usage: /iccraft [item/block name] (type)
+  icrecipe:
+    description: This is the command that shows the recipe of a item/block.
+    permission: ic.recipe
+    permission-message: You are not allowed this command.
+    usage: /icrecipe [item/block name] (type)
+  icconfig:
+    description: This is the config command.
+    permission: ic.config
+    permission-message: You are not allowed this command.
+    usage: /icconfig 
+    
+permissions:
+  ic:
+    description: Main command
+    default: not op
+  ic.craft:
+    description: Main craft command
+    default: not op
+  ic.config:
+    description: Config command
+    default: op
+  ic.recipe:
+    description: Recipe command
+    default: not op
+  ic.hoe:
+    description: Hoe tool 
+    default: not op
+  ic.shovel:
+    description: shovel tool
+    default: not op
+  ic.door:
+    description: door
+    default: not op
+  ic.sword:
+    description: sword
+    default: not op
+  ic.workbench:
+    description: workbench
+    default: not op
+  ic.axe:
+    description: axe 
+    default: not op
+  ic.pickaxe:
+    description: pickaxe
+    default: not op
+  ic.chest:
+    description: chest
+    default: not op
+  ic.sign:
+    description: sign
+    default: not op
+  ic.admin:
+    default: op
+    children:
+      ic.hoe: true
+      ic.shovel: true
+      ic.door: true
+      ic.sword: true
+      ic.workbench: true
+      ic.axe: true
+      ic.pickaxe: true
+      ic.chest: true
+      ic.sign: true
+      ic.config: true
+      ic.craft: true
+      ic: true
+      ic.recipe: true
+  ic.craft.all:
+    default: not op
+    children:
+      ic.hoe: true
+      ic.shovel: true
+      ic.door: true
+      ic.sword: true
+      ic.workbench: true
+      ic.axe: true
+      ic.pickaxe: true
+      ic.chest: true
+      ic.sign: true
+      ic.config: false
+      ic.craft: true
+      ic: true
+      ic.recipe: true
