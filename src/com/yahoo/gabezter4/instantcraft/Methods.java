@@ -1,8 +1,8 @@
 package com.yahoo.gabezter4.instantcraft;
 
-import java.util.HashMap;
-import java.util.Map.Entry;
-import org.bukkit.Material; 
+import java.util.Map;
+
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -14,7 +14,7 @@ public class Methods {
 		amount = 0;
 		PlayerInventory pi = player.getInventory();
 		for (Map.Entry entry : pi.all(Material.WOOD).entrySet()) {
-			amount += ((ItemStack) entry.4getValue()).getAmount();
+			amount += ((ItemStack) entry.getValue()).getAmount();
 		}
 		return amount;
 	}
